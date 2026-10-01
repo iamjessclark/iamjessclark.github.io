@@ -3,239 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jessica Clark · Infectious Disease Modelling</title>
-<meta name="description" content="Dr Jessica Clark — infectious disease epidemiologist at the University of Glasgow">
+<title>Jessica Clark, PhD · Infectious Disease Modelling</title>
+<meta name="description" content="Dr Jessica Clark — infectious disease epidemiologist and mathematical modeller at the University of Glasgow, working on Rift Valley fever and schistosomiasis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ===== Colours: change these to restyle the whole site ===== */
   :root {
-    --bg: #fbfaf7;
-    --surface: #ffffff;
-    --ink: #1c2226;
-    --muted: #5b666d;
-    --line: #e4e1da;
-    --accent: #0f6e6a;
-    --accent-soft: #e3f0ef;
-    --maxw: 980px;
+    --bg: #fafafa;
+    --ink: #2b2b2b;
+    --text: rgba(0,0,0,.68);
+    --muted: #707070;
+    --line: #e6e6e6;
+    --heading: #3f7fae;   /* section headings (blue) */
+    --kicker: #9b2c2c;    /* small uppercase labels (deep red) */
+    --band: #eef3f7;      /* tinted background bands */
+    --maxw: 1080px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121719;
-      --surface: #1a2124;
-      --ink: #e8ecec;
-      --muted: #9aa6aa;
-      --line: #2a3438;
-      --accent: #5cc2bb;
-      --accent-soft: #1c3331;
-    }
-  }
+
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.65 Inter, system-ui, -apple-system, sans-serif;
-  }
-  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  h1, h2, h3 { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0; }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 18px/1.75 Figtree, system-ui, sans-serif; }
+  a { color: var(--heading); text-underline-offset: 3px; }
+  h1, h2, h3, .site-name, nav a, .btn { font-family: Jost, "Futura", "Century Gothic", sans-serif; }
+  h1, h2, h3 { margin: 0; color: var(--ink); }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-  /* Nav */
-  nav {
-    position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  /* ===== Header: centred name with spaced-out menu ===== */
+  .site-header { text-align: center; padding: 40px 0 28px; }
+  .site-name {
+    display: inline-block; color: var(--ink); text-decoration: none;
+    font-size: 30px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
   }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
-  nav .brand { font-family: Fraunces, Georgia, serif; font-weight: 600; color: var(--ink); text-decoration: none; white-space: nowrap; }
-  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
-  nav ul::-webkit-scrollbar { display: none; }
-  nav ul a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-  nav ul a:hover { color: var(--accent); }
+  nav ul { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 34px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; }
+  nav a:hover { color: var(--ink); }
 
-  /* Hero */
-  header.hero { padding: 88px 0 72px; border-bottom: 1px solid var(--line); }
-  .hero .wrap { display: grid; grid-template-columns: 180px 1fr; gap: 44px; align-items: center; }
+  /* ===== Banner: full-width photo with big white tagline =====
+     Add a landscape photo called banner.jpg next to this file and it appears here.
+     Without it, a dark blue background is shown instead. */
+  .banner {
+    position: relative; min-height: 520px; display: grid; place-items: center; text-align: center;
+    background: #1f3b4d url("banner.jpg") center / cover no-repeat;
+  }
+  .banner::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+  .banner h1 {
+    position: relative; color: rgba(255,255,255,.95); max-width: 16ch; padding: 0 24px;
+    font-size: clamp(40px, 6.5vw, 72px); font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+  }
+
+  /* ===== Sections ===== */
+  section { padding: 96px 0; }
+  section + section { border-top: 1px solid var(--line); }
+  section.tinted { background: var(--band); border-top: 0; }
+  h2 { color: var(--heading); font-size: 36px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 28px; }
+  h3 { color: var(--kicker); font-size: 14px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 10px; }
+  p { margin: 0 0 18px; }
+
+  /* About: photo beside text */
+  .about { display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: center; }
+  /* To use a photo: add photo.jpg next to this file — it replaces the initials automatically. */
   .portrait {
-    width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
-    background: var(--accent-soft); color: var(--accent);
-    display: grid; place-items: center; font: 600 56px Fraunces, Georgia, serif;
+    aspect-ratio: 4 / 5; width: 100%; border-radius: 4px;
+    background: #d9e4ec url("photo.jpg") center / cover no-repeat;
+    display: grid; place-items: center;
+    font: 600 72px Jost, sans-serif; letter-spacing: .1em; color: rgba(63,127,174,.35);
   }
-  .hero h1 { font-size: clamp(34px, 5vw, 48px); }
-  .hero .role { font-size: 19px; color: var(--muted); margin: 10px 0 18px; }
-  .hero p { margin: 0 0 14px; max-width: 62ch; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+  /* Research: alternating rows */
+  .themes { display: grid; gap: 56px; }
+  .theme { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+  .theme .label { font-family: Jost, sans-serif; color: var(--ink); font-size: 26px; font-weight: 600; line-height: 1.25; }
+
+  /* Funding list */
+  .grants { list-style: none; margin: 0; padding: 0; }
+  .grants li { padding: 22px 0; border-top: 1px solid var(--line); }
+  .grants li:last-child { border-bottom: 1px solid var(--line); }
+  .grants .title { color: var(--ink); font-weight: 600; display: block; }
+  .grants .meta { color: var(--muted); font-size: 15px; }
+
+  /* Buttons */
+  .btns { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
   .btn {
-    display: inline-block; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px;
-    background: var(--surface); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500;
+    display: inline-block; padding: 14px 30px; border: 2px solid var(--ink); color: var(--ink);
+    text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
   }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  .btn.primary:hover { color: var(--bg); opacity: .9; }
+  .btn:hover { background: var(--ink); color: #fff; }
 
-  /* Sections */
-  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
-  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  section h2 { font-size: 32px; margin-bottom: 28px; }
-  .lead { max-width: 68ch; color: var(--muted); margin: -12px 0 32px; }
+  /* Closing band */
+  .closing { text-align: center; }
+  .closing h2 { color: var(--ink); }
+  .closing .btns { justify-content: center; }
+  .closing address { font-style: normal; color: var(--muted); margin-top: 32px; font-size: 16px; }
 
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
-  .card h3 { font-size: 20px; margin-bottom: 10px; }
-  .card p { margin: 0; color: var(--muted); font-size: 15px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
-  .tag { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  footer { text-align: center; padding: 32px 0 48px; color: var(--muted); font-size: 14px; letter-spacing: .08em; }
 
-  .list { list-style: none; margin: 0; padding: 0; }
-  .list li { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); }
-  .list li:last-child { border-bottom: 1px solid var(--line); }
-  .list .when { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 2px; }
-  .list strong { font-weight: 600; }
-  .list .sub { color: var(--muted); font-size: 14px; display: block; }
-
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-  .two h3 { font-size: 20px; margin-bottom: 14px; }
-  .plain { margin: 0; padding-left: 18px; }
-  .plain li { margin-bottom: 8px; }
-  .plain .when { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 6px; }
-
-  .callout { background: var(--accent-soft); border-radius: 14px; padding: 28px; max-width: 72ch; }
-  .callout p { margin: 0 0 12px; }
-  .callout p:last-child { margin: 0; }
-
-  footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }
-  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-
-  @media (max-width: 760px) {
-    header.hero { padding: 56px 0 48px; }
-    .hero .wrap { grid-template-columns: 1fr; gap: 24px; }
-    .portrait { width: 120px; height: 120px; font-size: 40px; }
-    .cards, .two { grid-template-columns: 1fr; }
-    .list li { grid-template-columns: 1fr; gap: 2px; }
-    nav .brand { display: none; }
-    section { padding: 52px 0; }
+  @media (max-width: 800px) {
+    .site-name { font-size: 22px; letter-spacing: .16em; }
+    nav ul { gap: 6px 20px; }
+    nav a { font-size: 12px; letter-spacing: .18em; }
+    .banner { min-height: 360px; }
+    section { padding: 64px 0; }
+    .about, .theme { grid-template-columns: 1fr; gap: 24px; }
+    .portrait { max-width: 280px; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a class="brand" href="#top">Jessica Clark</a>
+<header class="site-header" id="top">
+  <a class="site-name" href="#top">Jessica Clark, PhD</a>
+  <nav>
     <ul>
+      <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#funding">Funding</a></li>
-      <li><a href="#publications">Publications</a></li>
+      <li><a href="https://scholar.google.com/citations?hl=en&amp;user=EO1QLWfiimUC">Publications</a></li>
       <li><a href="#opportunities">Opportunities</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <!-- To use a photo: save it as photo.jpg next to this file and replace the div below with
-         <img class="portrait" src="photo.jpg" alt="Jessica Clark"> -->
-       <img class="portrait" src="photo.jpg" alt="Jessica Clark">
-    <div>
-      <h1>Dr Jessica Clark</h1>
-      <div class="role">Infectious disease epidemiologist</div>
-      <p> Over half the world’s population is at risk of vector-borne diseases (VBDs), which are transmitted to vertebrate hosts by organisms like mosquitos, snails and ticks. VBDs are often zoonotic (ZVBDs) which adds complications for control because they are often spread by multiple generalist vector species, that feed on and transmit disease to a range of animals, and people. Consequently, animal-targeted interventions may offer significant opportunities for zoonotic disease prevention at the source, simultaneously tackling the burden of disease in animals and people. A major challenge in developing interventions in this One Health framework, is the need for detailed epidemiological evidence spanning animal, vector, human, and environmental systems.</p> 
-      <p> In my research, I aim to bridge these diverse disciplines to inform evidence-based disease solutions. I develop mathematical and statistical modelling tools applied to a range of vector-borne and neglected diseases, lead a field data generating platform in Tanzania, and engage with a range of stakeholders to support the design of control and elimination programmes.</p>
-      <p> I'm currently based in the School of Biodiversity, One Health &amp; Veterinary Medicine at the University of Glasgow. </p>
-      <div class="links">
-        <a class="btn primary" href="mailto:Jessica.clark@glasgow.ac.uk">Email me</a>
-        <a class="btn" href="https://scholar.google.com/citations?hl=en&amp;user=EO1QLWfiimUC">Google Scholar</a>
-        <a class="btn" href="https://orcid.org/0000-0003-1692-899X">ORCID</a>
-      </div>
-    </div>
-  </div>
+  </nav>
 </header>
+
+<div class="banner">
+  <h1>Modelling Neglected &amp; Vector-borne Diseases</h1>
+</div>
 
 <main>
 
-<section id="research">
+<section id="about">
+  <div class="wrap about">
+    <div class="portrait" role="img" aria-label="Jessica Clark">JC</div>
+    <div>
+      <h2>About me</h2>
+      <p>I'm an infectious disease epidemiologist and mathematical modeller. I build mathematical and statistical models of neglected tropical and vector-borne diseases, with a focus on <strong>Rift Valley fever</strong> and <strong>schistosomiasis</strong>.</p>
+      <p>My work links transmission dynamics, diagnostics and field data to support vaccine development and the design of control and elimination programmes.</p>
+      <p>I'm based in the School of Biodiversity, One Health &amp; Veterinary Medicine at the University of Glasgow, and I'm the Glasgow Principal Investigator on a CEPI-funded consortium supporting Rift Valley fever vaccine development.</p>
+    </div>
+  </div>
+</section>
+
+<section id="research" class="tinted">
   <div class="wrap">
-    <div class="eyebrow">Research</div>
-    <h2>My current research</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>Rift Valley fever virus</h3>
-        <p>I am the Glasgow-based co-Principal Investigor on the CEPI funded REMIT consortium. This consortium brings together an experienced team of mathematical modellers, One Health epidemiologists, clinical researchers, vaccine trial specialists and social scientists to answer the overarching question: <i>Is a human RVF vaccine efficacy trial feasible, and if so, with what design and in what location? </i>  </p>
-        <div class="tags"><span class="tag">CEPI</span><span class="tag">Seroepidemiology</span><span class="tag">Vaccines</span><span class="tag">Modelling</span><span class="tag">Case definitions</span><span class="tag">Diagnostics</span></div>
-      </article>
-      <article class="card">
-        <h3>Schistosomiasis elimination</h3>
-        <p>Schistosomiasis remains a devasting disease in many parts of Africa. Despite extensive efforts, the factors driving outcomes to treatment against the disease remain poorly understood. DRIVERS and WickedSchisto bring together researchers working on basic science, field epidemiology and modelling, to work alongside Schistosomiasis Control Programme Managers within Ministries of Health in endemic countries. I am a Co-I on the DRIVERS team, and together we investigate the causes of treatment failure at both the individual level and community level across diverse eco-epidemiological settings, to improve treatment strategies. On the WickedSchisto team, I provide modelling and schistosomiasis expertise to inform the optimal deployment of WASH strategies.</p>
-        <div class="tags"><span class="tag">Schistosomiasis</span><span class="tag">MDA</span><span class="tag">Diagnostics</span><span class="tag">WASH</span><span class="tag">Dynamic transmission models</span><span class="tag">State-space models</span></div>
-      </article>
+    <h2>Research overview</h2>
+    <div class="themes">
+      <div class="theme">
+        <div><h3>Vaccines &amp; seroepidemiology</h3><div class="label">Rift Valley fever</div></div>
+        <p>Dynamic and statistical models of Rift Valley fever virus in livestock and people, including force-of-infection estimation from serological data, to inform where and how new vaccines are trialled and deployed.</p>
+      </div>
+      <div class="theme">
+        <div><h3>Treatment, diagnostics &amp; WASH</h3><div class="label">Schistosomiasis elimination</div></div>
+        <p>Understanding treatment efficacy and treatment failure, reconciling antigen- and egg-based diagnostics, and designing mass drug administration and WASH strategies that move programmes towards elimination.</p>
+      </div>
+      <div class="theme">
+        <div><h3>Bayesian &amp; spatial modelling</h3><div class="label">Methods for policy</div></div>
+        <p>Age-structured transmission models, spatially explicit dynamics and Bayesian causal inference, turned into practical tools that programme managers and policymakers can use.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="funding">
   <div class="wrap">
-    <div class="eyebrow">Funding</div>
-    <h2>Current Funding</h2>
-    <ul class="list">
-      <li>
-        <span class="when">2025 – 2027</span>
-        <span><strong>Epidemiology &amp; Modelling to Support Rift Valley Fever Vaccine Development</strong>
-        <span class="sub">Coalition for Epidemic Preparedness Innovations (CEPI) · Glasgow PI</span></span>
-      </li>
-      <li>
-        <span class="when">2025 – 2030</span>
-        <span><strong>Identifying drivers of schistosomiasis treatment failure and recommendations for treatment strategies</strong>
-        <span class="sub">Wellcome Discretionary Award · Co-investigator</span></span>
-      </li>
-      <li>
-        <span class="when">2024 – 2029</span>
-        <span><strong>WickedSchisto: an interdisciplinary WASH framework for schistosomiasis</strong>
-        <span class="sub">European Research Council · Co-investigator</span></span>
-      </li>
+    <h2>Current projects</h2>
+    <ul class="grants">
+      <li><span class="title">Epidemiology &amp; Modelling to Support Rift Valley Fever Vaccine Development</span>
+        <span class="meta">2025 – 2027 · Coalition for Epidemic Preparedness Innovations (CEPI) · Glasgow PI</span></li>
+      <li><span class="title">Identifying drivers of schistosomiasis treatment failure and recommendations for treatment strategies</span>
+        <span class="meta">2025 – 2030 · Wellcome Discretionary Award · Co-investigator</span></li>
+      <li><span class="title">WickedSchisto: an interdisciplinary WASH framework for schistosomiasis</span>
+        <span class="meta">2024 – 2029 · European Research Council · Co-investigator</span></li>
     </ul>
   </div>
 </section>
 
-<section id="publications">
+<section id="opportunities" class="tinted">
   <div class="wrap">
-    <div class="eyebrow">Publications</div>
-    <h2>Papers</h2>
-    <p class="lead">My full, up-to-date publication list is on Google Scholar.</p>
-    <div class="links">
-      <a class="btn primary" href="https://scholar.google.com/citations?hl=en&amp;user=EO1QLWfiimUC">View on Google Scholar</a>
-    </div>
+    <h2>Opportunities</h2>
+    <p>I'm always happy to hear from prospective PhD students, postdocs and fellows interested in infectious disease modelling, NTDs or vector-borne diseases, and to help develop fellowship or studentship applications.</p>
+    <p>Please <a href="mailto:Jessica.clark@glasgow.ac.uk">get in touch</a> with a short note on your interests and a CV.</p>
   </div>
 </section>
 
-<section id="opportunities">
+<section id="contact" class="closing">
   <div class="wrap">
-    <div class="eyebrow">Opportunities</div>
-    <h2>Join or work with me</h2>
-    <div class="callout">
-      <p>I'm always happy to be contacted about collaborations, training, mentoring or anything else to do with infectious disease modelling, neglected tropical, or vector-borne, diseases.</p>
-      <p>I don't currently have any opportunities, but watch this space!</p>
-      </div>
-  </div>
-</section>
-
-  <section id="contact">
-  <div class="wrap">
-    <div class="eyebrow">Contact</div>
+    <h3>Need any more information?</h3>
     <h2>Get in touch</h2>
-    <p>School of Biodiversity, One Health &amp; Veterinary Medicine<br>The ARC 5121<br>University of Glasgow, Glasgow, Scotland</p>
-    <p><a href="mailto:Jessica.clark@glasgow.ac.uk">Jessica.clark@glasgow.ac.uk</a></p>
+    <div class="btns">
+      <a class="btn" href="mailto:Jessica.clark@glasgow.ac.uk">Email</a>
+      <a class="btn" href="https://scholar.google.com/citations?hl=en&amp;user=EO1QLWfiimUC">Publications</a>
+    </div>
+    <address>School of Biodiversity, One Health &amp; Veterinary Medicine<br>University of Glasgow, Glasgow, Scotland</address>
   </div>
 </section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© Jessica Clark</span>
-    <span><a href="#top">Back to top ↑</a></span>
-  </div>
-</footer>
+<footer>© Jessica Clark</footer>
 
 </body>
 </html>
