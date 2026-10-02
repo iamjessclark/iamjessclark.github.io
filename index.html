@@ -44,8 +44,8 @@
      Add a landscape photo called banner.jpg next to this file and it appears here.
      Without it, a dark blue background is shown instead. */
   .banner {
-    position: relative; min-height: 520px; display: grid; place-items: center; text-align: center;
-    background: #1f3b4d url("banner.jpg") center / cover no-repeat;
+  position: relative; min-height: 520px; display: grid; place-items: start center; padding-top: 120px; text-align: center;
+  background: #1f3b4d url("banner.jpg") center / cover no-repeat;
   }
   .banner::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.35); }
   .banner h1 {
@@ -127,7 +127,7 @@
 </header>
 
 <div class="banner">
-  <h1>Quantiative tools to inform <br>One Health solutions</h1>
+  <h1>Quantitative tools to inform <br>One Health solutions</h1>
 </div>
 
 <main>
